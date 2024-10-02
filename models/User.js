@@ -1,40 +1,100 @@
-const mongoose = require('mongoose');
+const { Sequelize, DataTypes } = require('sequelize');
+const sequelize = require('../config/database')
 
-const UserSchema = new mongoose.Schema({
+
+
+
+const User = sequelize.define('User', {
     firstName: {
-        type: String,
-        required: true
-
+        type: DataTypes.STRING,
+        allowNull: false
     },
     lastName: {
-        type: String,
-        required: true
+        type: DataTypes.STRING,
+        allowNull: false
     },
     email: {
-        type: String,
-        // required: true,
-        unique: true
+        type: DataTypes.STRING,
+        unique: true,
+        allowNull: false 
     },
     phone: {
-        type: String,
-        required: true,
+        type: DataTypes.STRING,
+        allowNull: false,
         unique: true
     },
     password: {
-        type: String,
-        required: true,
+        type: DataTypes.STRING,
+        allowNull: false
     },
-    isVerified:{
-        type:Boolean,
-        default:false
+    isVerified: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
     },
-    otp:{
-        type:String,
+    otp: {
+        type: DataTypes.STRING,
+        allowNull: true 
     }
-
 }, {
     timestamps: true
 });
 
-const User = mongoose.model('User', UserSchema);
 module.exports = User;
+
+// const User = sequelize.define(
+//     'User',
+//     {
+//       // Model attributes are defined here
+//       firstName: {
+//         type: DataTypes.STRING,
+//         allowNull: false,
+//       },
+//       lastName: {
+//         type: DataTypes.STRING,
+//         // allowNull defaults to true
+//       },
+//     },
+//     {
+//       // Other model options go here
+//     },
+//   );
+
+
+// const UserSchema = new mongoose.Schema({
+//     firstName: {
+//         type: String,
+//         required: true
+
+//     },
+//     lastName: {
+//         type: String,
+//         required: true
+//     },
+//     email: {
+//         type: String,
+//         // required: true,
+//         unique: true
+//     },
+//     phone: {
+//         type: String,
+//         required: true,
+//         unique: true
+//     },
+//     password: {
+//         type: String,
+//         required: true,
+//     },
+//     isVerified:{
+//         type:Boolean,
+//         default:false
+//     },
+//     otp:{
+//         type:String,
+//     }
+
+// }, {
+//     timestamps: true
+// });
+
+// const User = mongoose.model('User', UserSchema);
+// module.exports = User;

@@ -1,24 +1,38 @@
 const swaggerJsDoc = require('swagger-jsdoc');
 const swaggerUi = require('swagger-ui-express');
 
-
-const swaggerOptions = {
-    swaggerDefinition: {
-      openapi: '3.0.0',
-      info: {
-        title: 'Movie API',
-        version: '1.0.0',
-        description: 'API for a movie app',
-      },
-      servers: [
-        {
-          url: 'http://localhost:8080', // قم بتغيير هذا إلى الـ URL الخاص بتطبيقك
+const options = {
+    definition: {
+        openapi: "3.0.0",
+        info: {
+            title: "Foodtopia",
+            version: "1.0.0",
         },
-      ],
+        components: {
+            securitySchemes: {
+                bearerAuth: {
+                    type: 'http',
+                    scheme: 'bearer',
+                    bearerFormat: 'JWT',
+                    description: 'Enter JWT Bearer token in this format: Bearer {token}',
+                },
+            },
+        },
+        servers: [
+            {
+                // url: 
+                url: "http://localhost:8080/"
+            }
+        ],
+        security: [
+            {
+                bearerAuth: []
+            }
+        ]
     },
-    apis: ['./routes/*.js'], // تحديد الملفات التي تحتوي على تعريفات الـ API
-  };
+    apis: ["./routes/*.js"]
+};
 
-const swaggerSpec = swaggerJsDoc(swaggerOptions);
+const swaggerSpec = swaggerJsDoc(options);
 
 module.exports = swaggerSpec;

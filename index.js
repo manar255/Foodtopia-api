@@ -3,7 +3,6 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
-const Sequelize = require('sequelize')
 const swaggerSpec = require('./Swagger/swaggerConfig.js')
 const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
@@ -33,19 +32,9 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRouter)
 
-
-
-
 const sequelize = new Sequelize(DB)
 
-sequelize.authenticate().then(() => {
 
-    console.log('Connection has been established successfully.');
-    app.listen(PORT, () => {
-        console.log(`Listening on port ${PORT}`);
-    });
-}).catch(error => {
-
-    console.error('Unable to connect to the database:', error);
-})
-
+app.listen(PORT, () => {
+    console.log(`Listening on port ${PORT}`);
+});
