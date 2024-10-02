@@ -4,32 +4,32 @@ const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
 const Sequelize = require('sequelize')
-
-const authRouter = require('./routers/authRouter')
-const { error } = require('console')
-
-const app = express()
-
-
+const swaggerSpec = require('./Swagger/swaggerConfig.js')
+const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
-app.use(bodyParser.json());
-app.use(cors());
 
-
-app.get('/', (req, res) => {
-    res.send('Hello World!')
-})
-
-
+const authRouter = require('./routes/authRouter.js')
 
 const PORT = process.env.PORT || 4000;
 
 const DB = process.env.DATABASE;
 
+const app = express()
 
-//use static file as css javascript images
-// app.use('/static', express.static(path.join(__dirname, 'public')))
 
+app.use(bodyParser.json());
+app.use(cors());
+
+
+
+
+//Swagger
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
+
+app.get('/', (req, res) => {
+    res.send('Hello World!')
+})
 
 app.use('/auth', authRouter)
 

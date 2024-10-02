@@ -1,3 +1,16 @@
 1-genrate and verfy phone otp 
 2-forget password (take email and send otp - verfy otp - new password)
 3-deploy project
+
+=====================================
+authentaction tasks:-
+
+- verfy phone and email after signup
+-forget password
+    -enter email or phone and send msg with otp
+    - verfy verfy otp
+    - set new password
+- login with google.
+- login with facebook.
+
+
