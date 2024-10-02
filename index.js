@@ -11,13 +11,15 @@ const { error } = require('console')
 const app = express()
 
 
+require('dotenv').config();
+app.use(bodyParser.json());
+app.use(cors());
+
+
 app.get('/', (req, res) => {
     res.send('Hello World!')
 })
 
-require('dotenv').config();
-app.use(bodyParser.json());
-app.use(cors());
 
 
 const PORT = process.env.PORT || 4000;

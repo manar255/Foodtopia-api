@@ -2,6 +2,8 @@ const User = require("../models/User");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 
+const speakeasy = require('speakeasy');
+
 const createUser = async (userData) => {
     try {
         //chick if user is exist
@@ -51,10 +53,21 @@ const generateToken = (data) => {
     }
 }
 
+const generateOTP = ()=>{
+    const secret = speakeasy.generateSecret({ length: 20 });
+    const code = speakeasy.totp({
+        secret: secret.base32,
+        encoding: 'base32'
+    });
+    console.log(code)
+    return code;
+    
+}
 
 module.exports = {
     createUser,
     findUser,
     comparePassword,
-    generateToken
+    generateToken,
+    generateOTP
 }
