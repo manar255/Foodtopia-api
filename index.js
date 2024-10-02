@@ -3,8 +3,10 @@ const path = require('path')
 const bodyParser = require('body-parser')
 const cors = require('cors')
 const mongoose = require('mongoose')
+const Sequelize = require('sequelize')
 
 const authRouter = require('./routers/authRouter')
+const { error } = require('console')
 
 const app = express()
 
@@ -19,8 +21,8 @@ app.use(cors());
 
 
 const PORT = process.env.PORT || 4000;
-console.log(PORT)
-const DB = process.env.DATABASE.replace('<PASSWORD>', process.env.DATABASE_PASSWORD);
+
+const DB = process.env.DATABASE;
 
 
 //use static file as css javascript images
@@ -31,13 +33,17 @@ app.use('/auth', authRouter)
 
 
 
-mongoose.connect(DB, {}).then(() => {
-    console.log('DB connection successfully!');
-    //run server.
+
+const sequelize = new Sequelize(DB)
+
+sequelize.authenticate().then(() => {
+
+    console.log('Connection has been established successfully.');
     app.listen(PORT, () => {
         console.log(`Listening on port ${PORT}`);
     });
+}).catch(error => {
 
-}).catch(err => {
-    console.error('DB connection error:', err);
-});
+    console.error('Unable to connect to the database:', error);
+})
+
