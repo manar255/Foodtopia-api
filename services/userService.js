@@ -60,8 +60,72 @@ const verfiyUser = async (phone,otp) => {
         throw error;
     }
 }
+
+const updateUserOtp= async(phone,otp)=>{
+    try {
+        // find user by email
+        const user = await findUser({ phone });
+        if (!user) {
+            const err = new Error('User not found');
+            err.status = 404;
+            throw err;
+            }
+        
+        
+        //update user status to active
+        await user.update({ otp: otp });
+        return user;
+    } catch (error) {
+        throw error;
+    }
+}
+const verfiyUserOTP = async (phone,otp) => {
+    try {
+        // find user by email
+        const user = await findUser({ phone });
+        if (!user) {
+            const err = new Error('User not found');
+            err.status = 404;
+            throw err;
+            }
+        //verfiy otp 
+        const isMatch = user.otp === otp;
+
+
+
+        return isMatch;
+    } catch (error) {
+        throw error;
+    }
+}
+
+const resetPassword= async (phone, password) => {
+    try {
+        // find user by email
+        const user = await findUser({ phone });
+        if (!user) {
+            const err = new Error('User not found');
+            err.status = 404;
+            throw err;
+            }
+        
+        
+        const hashedPassword=await authService.hashPassword(password);
+        //update user password
+        await user.update({ password: hashedPassword });
+
+
+
+        return user;
+    } catch (error) {
+        throw error;
+    }
+}
 module.exports = {
     createUser,
     findUser,
-    verfiyUser
+    verfiyUser,
+    updateUserOtp,
+    verfiyUserOTP,
+    resetPassword
 }
