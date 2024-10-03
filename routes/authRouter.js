@@ -90,6 +90,52 @@ router.post('/signUp', authController.signUp);
  */
 
 router.put('/verifyPhone',authController.verifyOTP)
+/**
+ * @swagger
+ * /auth/signIn:
+ *   post:
+ *     summary: Sign in a user
+ *     description: Authenticate a user by checking their email and password, and return a JWT token if successful.
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               email:
+ *                 type: string
+ *                 format: email
+ *                 description: The user's email address.
+ *                 example: "user@example.com"
+ *               password:
+ *                 type: string
+ *                 format: password
+ *                 description: The user's password.
+ *                 example: "password123"
+ *             required:
+ *               - email
+ *               - password
+ *     responses:
+ *       200:
+ *         description: User signed in successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 token:
+ *                   type: string
+ *                   description: The JWT token.
+ *                   example: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9..."
+ *                 message:
+ *                   type: string
+ *                   example: "sign in done successful"
+ *       401:
+ *         description: Invalid email, password, or unverified email
+ *       500:
+ *         description: Internal server error
+ */
 
 router.post('/signIn', authController.signIn)
 

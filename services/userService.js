@@ -54,8 +54,6 @@ const verfiyUser = async (phone,otp) => {
         }
 
         //update user status to active
-        console.log(user);
-        
         await user.update({ isVerified: true });
         return user;
     } catch (error) {

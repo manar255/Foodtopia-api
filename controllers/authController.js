@@ -44,7 +44,7 @@ const signIn = async (req, res, next) => {
         const { email, password } = req.body;
 
         //check if user exist
-        const user = await userService.findUser(email);
+        const user = await userService.findUser({email});
         if (!user) {
             return res.status(401).json({ message: 'Invalid email' });
         }
