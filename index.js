@@ -7,6 +7,8 @@ const swaggerSpec = require('./Swagger/swaggerConfig.js')
 const swaggerUi = require('swagger-ui-express');
 require('dotenv').config();
 
+
+const sequelize = require('./config/database.js')
 const authRouter = require('./routes/authRouter.js')
 
 const PORT = process.env.PORT || 4000;
@@ -32,9 +34,28 @@ app.get('/', (req, res) => {
 
 app.use('/auth', authRouter)
 
-const sequelize = new Sequelize(DB)
 
-
-app.listen(PORT, () => {
-    console.log(`Listening on port ${PORT}`);
+//Error handling 
+app.use((error, req, res, next) => {
+    console.error(error);
+    const status = error.status || 500;
+    const message = error.message || 'Internal Server Error';
+    res.status(status).json({ message });
 });
+
+
+sequelize.authenticate().then(() => {
+    
+    app.listen(PORT, () => {
+        console.log(`Listening on port ${PORT}`);
+    });
+    console.log('Connection has been established successfully.');
+    
+}).catch(error => {
+
+    console.error('Unable to connect to the database:', error);
+})
+
+
+
+

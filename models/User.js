@@ -39,6 +39,11 @@ const User = sequelize.define('User', {
     timestamps: true
 });
 
+ User.sync({ force: false }).then(()=>{
+    console.log('User table created')
+ }).catch((err)=>{
+    console.log(err);
+ });
 module.exports = User;
 
 // const User = sequelize.define(

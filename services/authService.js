@@ -1,35 +1,17 @@
-const User = require("../models/User");
+
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
+const vonage = require('../config/Vonage')
 
 const speakeasy = require('speakeasy');
+const { text } = require("body-parser");
 
-const createUser = async (userData) => {
+
+const hashPassword = async (password) => {
     try {
-        //chick if user is exist
-        const oldUser = await User.findOne({ email: userData.email });
-        if (oldUser) {
-            throw new Error('Email is already in use');
-        }
         //hash password
-        const hashedPassword = await bcrypt.hash(userData.password, 10);
-        //create new user
-        const user = new User({
-            ...userData,
-            password: hashedPassword
-        })
-        //save user
-        await user.save();
-
-    } catch (error) {
-        throw error;
-    }
-};
-
-const findUser = async (email) => {
-    try {
-        const user = await User.findOne({ email });
-        return user;
+        const hashedPassword = await bcrypt.hash(password, 10);
+        return hashedPassword;
     } catch (error) {
         throw error;
     }
@@ -44,6 +26,20 @@ const comparePassword = async (user, password) => {
     }
 }
 
+const sendSMS = async (phone, otp) => {
+    try {
+        const text = `Your OTP is ${otp}`
+        const from = "Foodtopia"
+        const to = `20${phone}`
+
+        //send msm
+        await vonage.sms.send({ to, from, text });
+
+    } catch (error) {
+        throw error;
+    }
+}
+
 const generateToken = (data) => {
     try {
         const token = jwt.sign(data, process.env.SECRET_KEY, { expiresIn: '1h' });
@@ -53,7 +49,7 @@ const generateToken = (data) => {
     }
 }
 
-const generateOTP = ()=>{
+const generateOTP = () => {
     const secret = speakeasy.generateSecret({ length: 20 });
     const code = speakeasy.totp({
         secret: secret.base32,
@@ -61,13 +57,13 @@ const generateOTP = ()=>{
     });
     console.log(code)
     return code;
-    
+
 }
 
 module.exports = {
-    createUser,
-    findUser,
+    hashPassword,
     comparePassword,
+    sendSMS,
     generateToken,
     generateOTP
 }

@@ -1,13 +1,16 @@
 const authService = require('../services/authService')
+const userService = require('../services/userService')
 const signUp = async (req, res, next) => {
     try {
         const { firstName, lastName, email, phone, password, confirmPassword } = req.body;
-        // create new user
-        const user = await authService.createUser({ firstName, lastName, email, phone, password });
         // generate new otp and send
-        user.otp = authService.generateOTP();
-        user.save();
-        //TODO: send email with otp
+        const otp = authService.generateOTP();
+
+        // create new user
+        const user = await userService.createUser({ firstName, lastName, email, phone, password, otp });
+
+        //TODO: send msg with otp
+        await authService.sendSMS(phone, otp);
 
         //return response
         res.status(200).json({ message: 'sign up done successful' });
@@ -21,18 +24,12 @@ const signUp = async (req, res, next) => {
 }
 const verifyOTP = async (req, res, next) => {
     try {
-        const { email, OTP } = req.body;
+        const { phone, otp } = req.body;
 
-        // find user by email
-        const user = authService.findUser( email );
-        //verfiy otp 
-        const isMatch = user.otp === OTP;
-        if(!isMatch){
-            res.status(401).json({ message: 'Invalid number' });
-        }
-        user.isVerified = true;
-        user.save();
-        res.status(200).json({ message: 'sign up done successful' });
+        const user = await userService.verfiyUser(phone,otp);
+        console.log(user);
+        
+        res.status(200).json({ message: 'your phone is verified' });
 
     } catch (err) {
 
@@ -47,11 +44,11 @@ const signIn = async (req, res, next) => {
         const { email, password } = req.body;
 
         //check if user exist
-        const user = await authService.findUser(email);
+        const user = await userService.findUser(email);
         if (!user) {
             return res.status(401).json({ message: 'Invalid email' });
         }
-        if(!user.isVerified){
+        if (!user.isVerified) {
             return res.status(401).json({ message: 'Your email is not verified' });
         }
         //check if password is correct
