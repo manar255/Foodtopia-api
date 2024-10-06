@@ -1,9 +1,7 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database')
 
-
-
-
+console.log('lol')
 const Item = sequelize.define('Item', {
     title: {
         type: DataTypes.STRING,
@@ -35,10 +33,5 @@ const Item = sequelize.define('Item', {
     timestamps: true
 });
 
-Item.sync({ force: true }).then(()=>{
-    console.log('Item table created')
- }).catch((err)=>{
-    console.log(err);
- });
 module.exports = Item;
 
