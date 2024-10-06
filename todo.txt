@@ -14,3 +14,14 @@ authentaction tasks:-
 - login with facebook.
 
 
+======================
+database:-
+- favorite list is relation
+- cart is relation
+- intity
+    - user
+    - product
+    - category
+    - review
+    - offers
+    - order
