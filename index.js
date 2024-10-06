@@ -38,6 +38,9 @@ app.get('/', (req, res) => {
 app.use('/auth', authRouter)
 
 
+app.use('/category',require('./routes/categoryRouter.js'))
+
+
 //Error handling 
 app.use((error, req, res, next) => {
     console.error(error);

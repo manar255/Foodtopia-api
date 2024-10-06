@@ -6,9 +6,16 @@ const authController = require('../controllers/authController');
 
 /**
  * @swagger
+ * tags:
+ *   name: Auth
+ *   description: 
+ */
+/**
+ * @swagger
  * /auth/signUp:
  *   post:
  *     summary: Register a new user
+ *     tags: [Auth]
  *     description: Create a new user account by providing user details.
  *     requestBody:
  *       required: true
@@ -61,6 +68,7 @@ router.post('/signUp', authController.signUp);
  * /auth/verifyPhone:
  *   put:
  *     summary: Verify a phone number with OTP
+ *     tags: [Auth]
  *     description: Verifies a phone number by checking the OTP (One Time Password) sent to the user.
  *     requestBody:
  *       required: true
@@ -95,6 +103,7 @@ router.put('/verifyPhone',authController.verifyOTP)
  * /auth/signIn:
  *   post:
  *     summary: Sign in a user
+ *     tags: [Auth]
  *     description: Authenticate a user by checking their email and password, and return a JWT token if successful.
  *     requestBody:
  *       required: true
@@ -144,6 +153,7 @@ router.post('/signIn', authController.signIn)
  * /auth/forgetPassword/sendEmail:
  *   put:
  *     summary: Send OTP to verify phone number
+ *     tags: [Auth]
  *     description: Generate and send an OTP to the user's phone number to verify it.
  *     requestBody:
  *       required: true
@@ -179,6 +189,7 @@ router.put('/forgetPassword/sendEmail', authController.sendOTPToVerifyPhone);
  * /auth/forgetPassword/verifyOTP:
  *   put:
  *     summary: Verify the OTP
+ *     tags: [Auth]
  *     description: Verify the OTP sent to the user's phone.
  *     requestBody:
  *       required: true
@@ -218,6 +229,7 @@ router.put('/forgetPassword/verifyOTP', authController.FPverifyOTP);
  * /auth/forgetPassword/resetPassword:
  *   put:
  *     summary: Reset password
+ *     tags: [Auth]
  *     description: Reset the user's password after verifying their phone number.
  *     requestBody:
  *       required: true
