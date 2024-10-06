@@ -9,9 +9,5 @@ const Order = sequelize.define("Order", {
 }, {
     timestamps: true
 })
-Order.sync({ force: false }).then(() => {
-    console.log('Order table created')
-}).catch((err) => {
-    console.log(err);
-});
+
 module.exports = Order;

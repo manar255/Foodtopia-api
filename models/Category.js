@@ -22,9 +22,5 @@ const Category = sequelize.define("Category", {
     timestamps: true
     
 })
-Category.sync({ force: false }).then(()=>{
-    console.log('Category table created')
- }).catch((err)=>{
-    console.log(err);
- });
+
 module.exports = Category;

@@ -15,10 +15,6 @@ const Review = sequelize.define('Review', {
     timestamps: true
 });
 
-Review.sync({ alter: true }).then(() => {
-    console.log('Review table created')
-}).catch((err) => {
-    console.log(err);
-});
+
 module.exports = Review;
 

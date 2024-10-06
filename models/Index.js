@@ -26,6 +26,7 @@ Item.belongsToMany(User, { through: Review })
 // User has many items in favorite list itme can add to many favorite lists
 User.belongsToMany(Item, { through: favoriteItem })
 Item.belongsToMany(User, { through: favoriteItem })
+
 // User can have many orders and order belongs to one user
 User.hasMany(Order)
 Order.belongsTo(User)

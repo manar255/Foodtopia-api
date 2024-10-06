@@ -19,9 +19,5 @@ const Offer = sequelize.define("Offer", {
     timestamps: true
     
 })
-Offer.sync({ force: false }).then(()=>{
-    console.log('Offer table created')
- }).catch((err)=>{
-    console.log(err);
- });
+
 module.exports = Offer;

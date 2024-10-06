@@ -1,4 +1,5 @@
-const Sequelize = require('sequelize')
+const Sequelize = require('sequelize');
+const { logger } = require('sequelize/lib/utils/logger');
 
 const DB = process.env.DATABASE;
 

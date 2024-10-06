@@ -5,6 +5,20 @@ const Item = require('./Item')
 
 
 const OrderItem = sequelize.define('OrderItem', {
+    // orderId: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: Order,
+    //         key: 'id'
+    //     }
+    // },
+    // itemId: {
+    //     type: DataTypes.INTEGER,
+    //     references: {
+    //         model: Item,
+    //         key: 'id'
+    //     }
+    // },
     quantity: {
         type: DataTypes.INTEGER
     },
@@ -14,10 +28,6 @@ const OrderItem = sequelize.define('OrderItem', {
     timestamps: true
 });
 
-OrderItem.sync({ alert: true }).then(() => {
-    console.log('OrderItem table created')
-}).catch((err) => {
-    console.log(err);
-});
+
 module.exports = OrderItem;
 
