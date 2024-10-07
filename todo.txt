@@ -25,3 +25,12 @@ database:-
     - review
     - offers
     - order
+=========================
+next tasks:-
+= add new item
+= get item in category
+= get item data
+= add offers
+= get all affers 
+= get offer details
+=========================
