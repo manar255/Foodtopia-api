@@ -29,6 +29,7 @@ const getItemsInCategory = async (req, res, next) => {
         next(err);
     }
 }
+
 module.exports = {
     addCategory,
     getCategories,

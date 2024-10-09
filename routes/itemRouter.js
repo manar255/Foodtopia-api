@@ -102,7 +102,7 @@ const itemController = require('../controllers/itemController')
  */
 
 
-router.post('/:CategoryId',itemController.addItem);
+router.post('/:CategoryId', itemController.addItem);
 
 /**
  * @swagger
@@ -158,7 +158,7 @@ router.post('/:CategoryId',itemController.addItem);
  *         description: Internal server error
  */
 
-router.get('/category/:CategoryId',itemController.getItemsInCategory);
+router.get('/category/:CategoryId', itemController.getItemsInCategory);
 
 /**
  * @swagger
@@ -212,6 +212,139 @@ router.get('/category/:CategoryId',itemController.getItemsInCategory);
  *         description: Internal server error
  */
 
-router.get('/:itemId',itemController.getItemDetails);
+router.get('/:itemId', itemController.getItemDetails);
+/**
+ * @swagger
+ * /item/{itemId}:
+ *   put:
+ *     summary: Edit an existing item
+ *     tags: [Item]
+ *     parameters:
+ *       - in: path
+ *         name: itemId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the item to edit
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               title:
+ *                 type: string
+ *                 example: "Updated Item Title"
+ *               image:
+ *                 type: string
+ *                 example: "https://example.com/item-image.jpg"
+ *               price:
+ *                 type: number
+ *                 example: 10.99
+ *               description:
+ *                 type: string
+ *                 example: "A new description for the item."
+ *               calorie:
+ *                 type: number
+ *                 example: 250
+ *               praperTime:
+ *                 type: number
+ *                 example: 15
+ *     responses:
+ *       200:
+ *         description: Item updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Item updated successfully"
+ *                 item:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     title:
+ *                       type: string
+ *                       example: "Updated Item Title"
+ *                     image:
+ *                       type: string
+ *                       example: "https://example.com/item-image.jpg"
+ *                     price:
+ *                       type: number
+ *                       example: 10.99
+ *                     description:
+ *                       type: string
+ *                       example: "A new description for the item."
+ *                     calorie:
+ *                       type: number
+ *                       example: 250
+ *                     praperTime:
+ *                       type: number
+ *                       example: 15
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: Item not found
+ *       500:
+ *         description: Server error
+ */
+router.put('/:itemId', itemController.editItem);
+/**
+ * @swagger
+ * /item/{itemId}:
+ *   delete:
+ *     summary: Delete an item
+ *     tags: [Item]
+ *     parameters:
+ *       - in: path
+ *         name: itemId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the item to delete
+ *     responses:
+ *       200:
+ *         description: Item deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 title:
+ *                   type: string
+ *                   example: "Deleted Item Title"
+ *                 image:
+ *                   type: string
+ *                   example: "https://example.com/item-image.jpg"
+ *                 price:
+ *                   type: number
+ *                   example: 10.99
+ *                 description:
+ *                   type: string
+ *                   example: "A description of the item."
+ *                 calorie:
+ *                   type: number
+ *                   example: 250
+ *                 praperTime:
+ *                   type: number
+ *                   example: 15
+ *       404:
+ *         description: Item not found
+ *       500:
+ *         description: Server error
+ */
+
+
+router.delete('/:itemId', itemController.deleteItem);
+
+
 
 module.exports = router;

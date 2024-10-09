@@ -27,7 +27,11 @@ database:-
     - order
 =========================
 next tasks:-
--
+- delete and update item
+- delete and update offer
+- delete and update Category
+- add item to cart
+
 =========================
 done :-
 = add new item 
