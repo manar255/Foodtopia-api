@@ -19,9 +19,7 @@ const getItems = async(attributes,query)=>{
 
 }
 const getItem = async(id,attributes)=>{
-    try{
-        console.log('lol');
-        
+    try{  
         const item = await Item.findByPk(id,{attributes});
         return item;
     }
