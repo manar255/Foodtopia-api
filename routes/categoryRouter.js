@@ -113,6 +113,62 @@ router.post('/', categoryController.addCategory);
  */
 router.get('/', categoryController.getCategories);
 
+/**
+ * @swagger
+ * /category/items/{CategoryId}:
+ *   get:
+ *     summary: Get items in a specific category
+ *     description: Retrieve all items belonging to a specific category by providing the category ID.
+ *     tags: [Category]
+ *     parameters:
+ *       - in: path
+ *         name: CategoryId
+ *         required: true
+ *         schema:
+ *           type: string
+ *         description: The ID of the category for which to retrieve the items.
+ *     responses:
+ *       200:
+ *         description: A list of items in the category
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   id:
+ *                     type: string
+ *                     description: Unique identifier for the item.
+ *                   title:
+ *                     type: string
+ *                     description: The title of the item.
+ *                   image:
+ *                     type: string
+ *                     description: The URL of the item image.
+ *                   price:
+ *                     type: number
+ *                     description: The price of the item.
+ *                   description:
+ *                     type: string
+ *                     description: A brief description of the item.
+ *                   calorie:
+ *                     type: number
+ *                     description: The number of calories in the item.
+ *                   praperTime:
+ *                     type: number
+ *                     description: Preparation time in minutes.
+ *                   categoryId:
+ *                     type: string
+ *                     description: The ID of the category to which the item belongs.
+ *       404:
+ *         description: Category not found
+ *       500:
+ *         description: Internal server error
+ */
+
+router.get('/items/:categoryId',categoryController.getItemsInCategory)
+
 
 
 module.exports = router;

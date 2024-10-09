@@ -26,7 +26,6 @@ const getItem = async(id,attributes)=>{
     catch(err){
         throw err;
     }
-
 }
 
 module.exports={

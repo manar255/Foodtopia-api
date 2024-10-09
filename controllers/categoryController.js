@@ -20,7 +20,17 @@ const getCategories = async (req, res, next) => {
     }
 }
 
+const getItemsInCategory = async (req, res, next) => {
+    try {
+        const { categoryId } = req.params;
+        const items = await categoryService.getCategoryItems(categoryId);
+        res.status(200).json(items)
+    } catch (err) {
+        next(err);
+    }
+}
 module.exports = {
     addCategory,
     getCategories,
+    getItemsInCategory
 }

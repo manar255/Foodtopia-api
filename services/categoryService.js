@@ -21,8 +21,20 @@ const getCategories = async (attributes, query) => {
     }
 }
 
+const getCategoryItems = async (id) => {
+    try {
+        const category =await Category.findByPk(id);
+        
+        const items =await category.getItems();
+        console.log(items);
+        return items;
+    } catch (err) {
+        throw err;
+    }
+}
 
 module.exports = {
     getCategories,
-    createCategory
+    createCategory,
+    getCategoryItems
 }
