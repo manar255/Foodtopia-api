@@ -1,13 +1,12 @@
 const { Sequelize, DataTypes } = require('sequelize');
 const sequelize = require('../config/database')
 
-console.log('lol')
 const Item = sequelize.define('Item', {
     title: {
         type: DataTypes.STRING,
         allowNull: false
     },
-    Image: {
+    image: {
         type: DataTypes.STRING,
         allowNull: false
     },

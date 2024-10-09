@@ -27,10 +27,12 @@ database:-
     - order
 =========================
 next tasks:-
-= add new item
+= add new item 
 = get item in category
 = get item data
 = add offers
 = get all affers 
 = get offer details
 =========================
+-ضبط الداتا الى راجعه ف الريسبونس
+- data validation اعمل 

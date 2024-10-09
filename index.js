@@ -39,6 +39,7 @@ app.use('/auth', authRouter)
 
 
 app.use('/category',require('./routes/categoryRouter.js'))
+app.use('/item',require('./routes/itemRouter.js'))
 
 
 //Error handling 

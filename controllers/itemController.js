@@ -1,0 +1,41 @@
+const itemService = require('../services/itemService')
+
+const addItem = async (req, res, next) => {
+    try {
+        const {CategoryId} = req.params;
+        const { title, image, price, description, calorie, praperTime } = req.body;
+        const item = await itemService.createItem({title,image,price,description,calorie,praperTime,CategoryId})
+        res.status(201).json({ message: 'New item created successfully', item })
+    } catch (err) {
+        next(err);
+    }
+}
+
+const getItemsInCategory = async (req, res, next) => {
+    try {
+        const {CategoryId} = req.params;
+        
+        const items = await itemService.getItems(['title','CategoryId'],{CategoryId:CategoryId})
+
+        res.status(200).json( items )
+    } catch (err) {
+        next(err);
+    }
+}
+
+const getItemDetails = async (req, res, next) => {
+    try {
+        const {itemId} = req.params;
+        
+        const item = await itemService.getItem(itemId,['title','image'])
+
+        res.status(200).json( item)
+    } catch (err) {
+        next(err);
+    }
+}
+module.exports={
+    addItem,
+    getItemsInCategory,
+    getItemDetails
+}
