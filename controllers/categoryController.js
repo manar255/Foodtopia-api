@@ -29,9 +29,36 @@ const getItemsInCategory = async (req, res, next) => {
         next(err);
     }
 }
+const editCategory = async (req, res, next) => {
+    try {
+        const { categoryId } = req.params;
+        const { name, description, image, isMain } = req.body;
+
+        const category = await categoryService.updateCategory(categoryId,{ name, description, image, isMain });
+
+        res.status(200).json({ message: 'Category updated successfully', category })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+const deleteCategory = async (req, res, next) => {
+    try {
+        const { categoryId } = req.params;
+
+        const category = await categoryService.deleteCategory(categoryId);
+
+        res.status(200).json(category)
+    } catch (err) {
+        next(err);
+    }
+}
 
 module.exports = {
     addCategory,
     getCategories,
-    getItemsInCategory
+    getItemsInCategory,
+    editCategory,
+    deleteCategory
 }

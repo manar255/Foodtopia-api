@@ -168,6 +168,120 @@ router.get('/', categoryController.getCategories);
  */
 
 router.get('/items/:categoryId',categoryController.getItemsInCategory)
+/**
+ * @swagger
+ * /category/{categoryId}:
+ *   put:
+ *     summary: Edit an existing category
+ *     tags: [Category]
+ *     parameters:
+ *       - in: path
+ *         name: categoryId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the category to edit
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               name:
+ *                 type: string
+ *                 example: "Updated Category Name"
+ *               description:
+ *                 type: string
+ *                 example: "Updated category description"
+ *               image:
+ *                 type: string
+ *                 example: "https://example.com/category-image.jpg"
+ *               isMain:
+ *                 type: boolean
+ *                 example: true
+ *     responses:
+ *       200:
+ *         description: Category updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Category updated successfully"
+ *                 category:
+ *                   type: object
+ *                   properties:
+ *                     id:
+ *                       type: integer
+ *                       example: 1
+ *                     name:
+ *                       type: string
+ *                       example: "Updated Category Name"
+ *                     description:
+ *                       type: string
+ *                       example: "Updated category description"
+ *                     image:
+ *                       type: string
+ *                       example: "https://example.com/category-image.jpg"
+ *                     isMain:
+ *                       type: boolean
+ *                       example: true
+ *       400:
+ *         description: Bad request
+ *       404:
+ *         description: Category not found
+ *       500:
+ *         description: Server error
+ */
+router.put('/:categoryId', categoryController.editCategory);
+
+/**
+ * @swagger
+ * /category/{categoryId}:
+ *   delete:
+ *     summary: Delete a category
+ *     tags: [Category]
+ *     parameters:
+ *       - in: path
+ *         name: categoryId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The ID of the category to delete
+ *     responses:
+ *       200:
+ *         description: Category deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 id:
+ *                   type: integer
+ *                   example: 1
+ *                 name:
+ *                   type: string
+ *                   example: "Deleted Category Name"
+ *                 description:
+ *                   type: string
+ *                   example: "Deleted category description"
+ *                 image:
+ *                   type: string
+ *                   example: "https://example.com/category-image.jpg"
+ *                 isMain:
+ *                   type: boolean
+ *                   example: true
+ *       404:
+ *         description: Category not found
+ *       500:
+ *         description: Server error
+ */
+
+router.delete('/:categoryId', categoryController.deleteCategory);
+
 
 
 

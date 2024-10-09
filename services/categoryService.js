@@ -32,9 +32,34 @@ const getCategoryItems = async (id) => {
         throw err;
     }
 }
+const deleteCategory= async (id) => {
+    try {
+        const category = await Category.destroy({ where: { id: id } });
+        return category;
+    } catch (err) {
+        throw err;
+    }
 
+}
+
+const updateCategory = async (id, categoryData) => {
+    try {
+        const category = await Category.update(
+            categoryData,
+            {
+                where: {
+                    id,
+                },
+            },
+        );
+    } catch (err) {
+        throw err;
+    }
+}
 module.exports = {
     getCategories,
     createCategory,
-    getCategoryItems
+    getCategoryItems,
+    deleteCategory,
+    updateCategory
 }
