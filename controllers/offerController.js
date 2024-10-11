@@ -33,11 +33,38 @@ const getOfferdetails = async (req, res, next) => {
         next(err)
     }
 }
+const editOffer = async (req, res, next) => {
+    try {
+        const { offerId } = req.params;
+        const { description, image, percentage, items }  = req.body;
+
+        const offer = await offerService.updateOffer(offerId, { description, image, percentage ,items});
+
+        res.status(200).json({ message: 'Offer updated successfully', offer })
+
+    } catch (err) {
+        next(err);
+    }
+}
+
+const deleteOffer = async (req, res, next) => {
+    try {
+        const { offerId } = req.params;
+
+        const offer = await offerService.deleteOffer(offerId);
+
+        res.status(200).json(offer)
+    } catch (err) {
+        next(err);
+    }
+}
 //add items to offer
 //delete offer
 //get offer details
 module.exports = {
     addOffer,
     getAllOffers,
-    getOfferdetails
+    getOfferdetails,
+    editOffer,
+    deleteOffer
 }

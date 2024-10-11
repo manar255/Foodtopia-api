@@ -163,6 +163,93 @@ router.get('/', offerController.getAllOffers);
 
 
 router.get('/:id', offerController.getOfferdetails);
+/**
+ * @swagger
+ * /offer/{offerId}:
+ *   put:
+ *     summary: Update an offer by ID
+ *     tags: [Offer]
+ *     parameters:
+ *       - in: path
+ *         name: offerId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The offer ID
+ *     requestBody:
+ *       required: true
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               description:
+ *                 type: string
+ *                 example: "Get 30% off on selected items"
+ *               image:
+ *                 type: string
+ *                 example: "https://example.com/updated-offer-image.jpg"
+ *               percentage:
+ *                 type: number
+ *                 example: 30
+ *               items:
+ *                 type: array
+ *                 items:
+ *                   type: integer
+ *                 example: [1]
+ *     responses:
+ *       200:
+ *         description: Offer updated successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Offer updated successfully"
+ *                 offer:
+ *                   $ref: '#/components/schemas/Offer'
+ *       404:
+ *         description: Offer not found
+ *       500:
+ *         description: Server error
+ */
 
+router.put('/:offerId', offerController.editOffer);
+/**
+ * @swagger
+ * /offer/{offerId}:
+ *   delete:
+ *     summary: Delete an offer by ID
+ *     tags: [Offer]
+ *     parameters:
+ *       - in: path
+ *         name: offerId
+ *         required: true
+ *         schema:
+ *           type: integer
+ *         description: The offer ID
+ *     responses:
+ *       200:
+ *         description: Offer deleted successfully
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 message:
+ *                   type: string
+ *                   example: "Offer deleted successfully"
+ *                 offerId:
+ *                   type: integer
+ *                   example: 1
+ *       404:
+ *         description: Offer not found
+ *       500:
+ *         description: Server error
+ */
+
+router.delete('/:offerId', offerController.deleteOffer);
 
 module.exports = router;

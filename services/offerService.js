@@ -38,9 +38,45 @@ const getOfferById = async (id) => {
 
     }
 }
+const deleteOffer = async (id) => {
+    try {
+        const offer = await Offer.destroy({ where: { id: id } });
+        return offer;
+    } catch (err) {
+        throw err;
+    }
 
+}
+
+const updateOffer = async (id, offerData) => {
+    try {
+       
+        const offer = await Offer.findByPk(id);
+        if (!offer) {
+            throw new Error('Offer not found');
+        }
+
+        
+        await offer.update(offerData);
+
+        
+        if (offerData.items) {
+            await offer.setItems(offerData.items); // Assuming the offer has a setItems method for associations
+        }
+
+        return offer;
+
+
+
+        return offer;
+    } catch (err) {
+        throw err;
+    }
+}
 module.exports = {
     createOffer,
     getOfferById,
-    getOffers
+    getOffers,
+    deleteOffer,
+    updateOffer
 }

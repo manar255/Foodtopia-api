@@ -27,9 +27,7 @@ database:-
     - order
 =========================
 next tasks:-
-- delete and update item
 - delete and update offer
-- delete and update Category
 - add item to cart
 
 =========================
@@ -40,6 +38,8 @@ done :-
 = add offers
 = get all affers 
 = get offer details
+- delete and update item
+- delete and update Category
 =========================
 - ضبط الداتا الى راجعه ف الريسبونس
 - data validation اعمل 

@@ -36,8 +36,8 @@ User.belongsToMany(Item, { through: Cart })
 Item.belongsToMany(User, { through: Cart })
 
 //Order has many items and item can add to many orders
-Order.belongsToMany(Item, { through: OrderItem })
-Item.belongsToMany(Order, { through: OrderItem })
+Order.belongsToMany(Item, {onUpdate: 'NO ACTION', through: OrderItem })
+Item.belongsToMany(Order, {onUpdate: 'NO ACTION', through: OrderItem })
 
 
 // // offer has many Item and itme may belong to many offers
