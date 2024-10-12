@@ -27,8 +27,12 @@ database:-
     - order
 =========================
 next tasks:-
-- delete and update offer
 - add item to cart
+- remove item from cart
+- edit item quantity in cart
+- add item to favorite list
+- remove item from favorite list
+
 
 =========================
 done :-
@@ -39,6 +43,7 @@ done :-
 = get all affers 
 = get offer details
 - delete and update item
+- delete and update offer
 - delete and update Category
 =========================
 - ضبط الداتا الى راجعه ف الريسبونس
