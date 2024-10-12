@@ -26,12 +26,13 @@ database:-
     - offers
     - order
 =========================
-next tasks:-
-
+next tasks:- 
 - add item to favorite list
+- remove Item from favorite list
+- get all in favorite list
+- get all item in cart
 - remove item from favorite list
-
-
+- add payment gateway
 =========================
 done :-
 = add new item 

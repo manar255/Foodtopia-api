@@ -27,6 +27,20 @@ const addToCart = async (req, res, next) => {
     }
 }
 
+//get items in cart
+const getItemsInCart = async (req, res, next) => {
+    try {
+        const userId = 1
+        const cartItems = await cartService.getCartItems(userId)
+        res.json(cartItems);
+    } catch (err) {
+        next(err);
+    }
+}
+
+
+
+
 //update item quantity in cart
 const updateItemQuantity = async (req, res, next) => {
     try {
@@ -62,6 +76,7 @@ const removeItemFromCart = async (req, res, next) => {
 }
 module.exports = {
     addToCart,
+    getItemsInCart,
     updateItemQuantity,
     removeItemFromCart
 }

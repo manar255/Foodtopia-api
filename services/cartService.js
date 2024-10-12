@@ -1,6 +1,8 @@
 const { where } = require("sequelize");
 const Cart = require("../models/Cart");
 
+const { findUser } = require("./userService");
+
 const findItemInCart = async (query) => {
     try {
         const cartItem = await Cart.findOne({ where: query });
@@ -35,9 +37,24 @@ const deleteItemFromCart = async (UserId, ItemId,) => {
         throw err;
     }
 }
+
+const getCartItems = async (userId) => {
+    try {
+        const user = await findUser( { id: userId });
+        const cartItems = await user.getCart();
+        console.log(cartItems);
+        
+        return cartItems;
+    } catch (err) {
+        throw err;
+    }
+}
+
+
 module.exports = {
     findItemInCart,
     updateItemQuantity,
     addItemToCart,
-    deleteItemFromCart
+    deleteItemFromCart,
+    getCartItems
 }

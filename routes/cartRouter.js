@@ -10,6 +10,41 @@ const cartController = require('../controllers/cartController')
  *   name: Cart
  *   description: Cart management operations
  */
+
+/**
+ * @swagger
+ * /cart:
+ *   get:
+ *     summary: Retrieve a list of items in the user's cart
+ *     tags: [Cart]
+ *     responses:
+ *       200:
+ *         description: A list of items in the cart
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               items:
+ *                 type: object
+ *                 properties:
+ *                   itemId:
+ *                     type: integer
+ *                     example: 1
+ *                   name:
+ *                     type: string
+ *                     example: "Item name"
+ *                   price:
+ *                     type: number
+ *                     example: 19.99
+ *                   quantity:
+ *                     type: integer
+ *                     example: 2
+ *       500:
+ *         description: Server error
+ */
+
+router.get('/',cartController.getItemsInCart)
+
 /**
  * @swagger
  * /cart/{itemId}:

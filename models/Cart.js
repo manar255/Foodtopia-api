@@ -4,7 +4,7 @@ const sequelize = require('../config/database')
 const Cart = sequelize.define('Cart', {
     quantity: {
         type: DataTypes.INTEGER,
-        default: 1,
+        defaultValue: 1,
     }
 
 }, {
