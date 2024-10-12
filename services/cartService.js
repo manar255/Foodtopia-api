@@ -10,7 +10,7 @@ const findItemInCart = async (query) => {
     }
 }
 
-const updateItemQuantity = async (cartItem,addedQuantity) => {
+const updateItemQuantity = async (cartItem, addedQuantity) => {
     try {
         const updatedQuantity = cartItem.quantity + addedQuantity;
         cartItem.quantity = updatedQuantity;
@@ -19,7 +19,7 @@ const updateItemQuantity = async (cartItem,addedQuantity) => {
         throw err;
     }
 }
-const addItemToCart = async (UserId,ItemId,quantity) => {
+const addItemToCart = async (UserId, ItemId, quantity) => {
     try {
         const newCartItem = await Cart.create({ UserId, ItemId, quantity })
         return newCartItem;
@@ -27,8 +27,17 @@ const addItemToCart = async (UserId,ItemId,quantity) => {
         throw err;
     }
 }
+const deleteItemFromCart = async (UserId, ItemId,) => {
+    try {
+        await Cart.destroy({ where: { UserId, ItemId } })
+
+    } catch (err) {
+        throw err;
+    }
+}
 module.exports = {
     findItemInCart,
     updateItemQuantity,
-    addItemToCart
+    addItemToCart,
+    deleteItemFromCart
 }

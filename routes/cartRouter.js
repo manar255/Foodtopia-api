@@ -10,13 +10,20 @@ const cartController = require('../controllers/cartController')
  *   name: Cart
  *   description: Cart management operations
  */
-
 /**
  * @swagger
- * /cart:
+ * /cart/{itemId}:
  *   post:
  *     summary: Add an item to the user's cart
  *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: itemId
+ *         required: true
+ *         description: The ID of the item to add
+ *         schema:
+ *           type: integer
+ *           example: 1
  *     requestBody:
  *       required: true
  *       content:
@@ -24,16 +31,11 @@ const cartController = require('../controllers/cartController')
  *           schema:
  *             type: object
  *             required:
- *               - itemId
  *               - quantity
  *             properties:
- *               itemId:
- *                 type: integer
- *                 description: The ID of the item to add
- *                 example: 1
  *               quantity:
  *                 type: integer
- *                 description: The quantity of the item
+ *                 description: The quantity of the item to add
  *                 example: 2
  *     responses:
  *       200:
@@ -60,7 +62,61 @@ const cartController = require('../controllers/cartController')
  *         description: Server error
  */
 
-router.post('/',cartController.addToCart);
+
+router.post('/:itemId',cartController.addToCart);
+/**
+ * @swagger
+ * /cart/{itemId}:
+ *   put:
+ *     summary: Update the quantity of an item in the cart
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: itemId
+ *         required: true
+ *         description: The ID of the item to update
+ *         schema:
+ *           type: integer
+ *       - in: body
+ *         name: quantity
+ *         required: true
+ *         description: New quantity for the item
+ *         schema:
+ *           type: object
+ *           properties:
+ *             quantity:
+ *               type: integer
+ *     responses:
+ *       200:
+ *         description: Item quantity updated successfully
+ *       404:
+ *         description: Item not found in cart
+ *       500:
+ *         description: Internal server error
+ */
+
+router.put('/:itemId',cartController.updateItemQuantity);
+/**
+ * @swagger
+ * /cart/{itemId}:
+ *   delete:
+ *     summary: Remove an item from the cart
+ *     tags: [Cart]
+ *     parameters:
+ *       - in: path
+ *         name: itemId
+ *         required: true
+ *         description: The ID of the item to remove
+ *         schema:
+ *           type: integer
+ *     responses:
+ *       200:
+ *         description: Item removed from cart
+ *       500:
+ *         description: Internal server error
+ */
+
+router.delete('/:itemId',cartController.removeItemFromCart);
 
 
 module.exports=router;

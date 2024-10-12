@@ -27,9 +27,7 @@ database:-
     - order
 =========================
 next tasks:-
-- add item to cart
-- remove item from cart
-- edit item quantity in cart
+
 - add item to favorite list
 - remove item from favorite list
 
@@ -45,6 +43,9 @@ done :-
 - delete and update item
 - delete and update offer
 - delete and update Category
+- add item to cart
+- remove item from cart
+- edit item quantity in cart
 =========================
 - ضبط الداتا الى راجعه ف الريسبونس
 - data validation اعمل 
