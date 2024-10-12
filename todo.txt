@@ -27,11 +27,9 @@ database:-
     - order
 =========================
 next tasks:- 
-- add item to favorite list
-- remove Item from favorite list
-- get all in favorite list
-- get all item in cart
-- remove item from favorite list
+
+- order item in cart 
+
 - add payment gateway
 =========================
 done :-
@@ -47,6 +45,11 @@ done :-
 - add item to cart
 - remove item from cart
 - edit item quantity in cart
+- add item to favorite list
+- remove Item from favorite list
+
+- get all in favorite list
+- get all item in cart
 =========================
 - ضبط الداتا الى راجعه ف الريسبونس
 - data validation اعمل 

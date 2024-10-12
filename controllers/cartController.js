@@ -39,8 +39,6 @@ const getItemsInCart = async (req, res, next) => {
 }
 
 
-
-
 //update item quantity in cart
 const updateItemQuantity = async (req, res, next) => {
     try {
