@@ -29,6 +29,9 @@ database:-
 next tasks:- 
 
 - order item in cart 
+- update order status [ cancel - recived]
+- get user all orders
+- get all orders
 
 - add payment gateway
 =========================
@@ -47,7 +50,6 @@ done :-
 - edit item quantity in cart
 - add item to favorite list
 - remove Item from favorite list
-
 - get all in favorite list
 - get all item in cart
 =========================

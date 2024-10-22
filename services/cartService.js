@@ -40,11 +40,22 @@ const deleteItemFromCart = async (UserId, ItemId,) => {
 
 const getCartItems = async (userId) => {
     try {
-        const user = await findUser( { id: userId });
+        const user = await findUser({ id: userId });
         const cartItems = await user.getCart();
         console.log(cartItems);
-        
+
         return cartItems;
+    } catch (err) {
+        throw err;
+    }
+}
+const resetCart = async (userId) => {
+    try {
+        const user = await findUser({ id: userId });
+        await user.gsetCart([]);
+       
+
+       
     } catch (err) {
         throw err;
     }
@@ -56,5 +67,6 @@ module.exports = {
     updateItemQuantity,
     addItemToCart,
     deleteItemFromCart,
-    getCartItems
+    getCartItems,
+    resetCart
 }

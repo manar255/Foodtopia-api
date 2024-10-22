@@ -12,12 +12,12 @@ const Item = sequelize.define('Item', {
     },
     price: {
         type: DataTypes.INTEGER,
-        allowNull: false 
+        allowNull: false
     },
     description: {
         type: DataTypes.STRING,
         allowNull: false,
-        
+
     },
     calorie: {
         type: DataTypes.INTEGER,
@@ -27,7 +27,11 @@ const Item = sequelize.define('Item', {
         type: DataTypes.INTEGER,
         defaultValue: false
     },
-    
+    isAvailable: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: true
+    }
+
 }, {
     timestamps: true
 });
