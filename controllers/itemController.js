@@ -1,10 +1,16 @@
 const itemService = require('../services/itemService')
+const uploadToCloudinary = require('../services/uploadFileService').uploadToCloudinary;
+
 
 const addItem = async (req, res, next) => {
     try {
         const { CategoryId } = req.params;
-        const { title, image, price, description, calorie, praperTime } = req.body;
-        const item = await itemService.createItem({ title, image, price, description, calorie, praperTime, CategoryId })
+        const image = await uploadToCloudinary(req.file.buffer,'Items');
+        const imageURl=image.url;
+        console.log("lol=>",imageURl);
+        
+        const { title, price, description, calorie, praperTime } = req.body;
+        const item = await itemService.createItem({ title, image:imageURl, price, description, calorie, praperTime, CategoryId })
         res.status(201).json({ message: 'New item created successfully', item })
     } catch (err) {
         next(err);

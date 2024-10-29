@@ -3,7 +3,8 @@ const express = require('express')
 const router = express.Router()
 
 const itemController = require('../controllers/itemController')
-
+const upload = require('../middlewars/uploadFiles');
+const { image } = require('../config/Cloudinary');
 /**
  * @swagger
  * tags:
@@ -11,52 +12,46 @@ const itemController = require('../controllers/itemController')
  *   description: Item management operations
  */
 /**
+
 /**
  * @swagger
  * /item/{CategoryId}:
  *   post:
- *     summary: Add a new item to a specific category
- *     description: Create a new item under the category specified by CategoryId.
+ *     summary: Add a new item to a category
  *     tags: [Item]
  *     parameters:
  *       - in: path
  *         name: CategoryId
- *         required: true
  *         schema:
  *           type: string
- *         description: The ID of the category to which the item belongs.
+ *         required: true
+ *         description: ID of the category to which the item belongs
  *     requestBody:
  *       required: true
  *       content:
- *         application/json:
+ *         multipart/form-data:
  *           schema:
  *             type: object
  *             properties:
- *               title:
- *                 type: string
- *                 description: The title of the item.
  *               image:
  *                 type: string
- *                 description: The URL of the item image.
+ *                 format: binary
+ *                 description: Image file for the item
+ *               title:
+ *                 type: string
+ *                 description: Title of the item
  *               price:
  *                 type: number
- *                 description: The price of the item.
+ *                 description: Price of the item
  *               description:
  *                 type: string
- *                 description: A brief description of the item.
+ *                 description: Description of the item
  *               calorie:
  *                 type: number
- *                 description: The number of calories in the item.
+ *                 description: Calorie count of the item
  *               praperTime:
  *                 type: number
- *                 description: Preparation time in minutes.
- *             required:
- *               - title
- *               - image
- *               - price
- *               - description
- *               - calorie
- *               - praperTime
+ *                 description: Preparation time of the item (in minutes)
  *     responses:
  *       201:
  *         description: Item created successfully
@@ -67,42 +62,33 @@ const itemController = require('../controllers/itemController')
  *               properties:
  *                 message:
  *                   type: string
- *                   description: Success message.
+ *                   example: New item created successfully
  *                 item:
  *                   type: object
  *                   properties:
  *                     id:
  *                       type: string
- *                       description: Unique identifier for the item.
+ *                       description: The item ID
  *                     title:
  *                       type: string
- *                       description: The title of the item.
  *                     image:
  *                       type: string
- *                       description: The URL of the item image.
+ *                       description: URL of the uploaded image
  *                     price:
  *                       type: number
- *                       description: The price of the item.
  *                     description:
  *                       type: string
- *                       description: A brief description of the item.
  *                     calorie:
  *                       type: number
- *                       description: The number of calories in the item.
  *                     praperTime:
  *                       type: number
- *                       description: Preparation time in minutes.
- *                     categoryId:
+ *                     CategoryId:
  *                       type: string
- *                       description: The ID of the category to which the item belongs.
- *       400:
- *         description: Invalid request body
  *       500:
  *         description: Internal server error
  */
+router.post('/:CategoryId', upload.single('image'), itemController.addItem);
 
-
-router.post('/:CategoryId', itemController.addItem);
 
 /**
  * @swagger
