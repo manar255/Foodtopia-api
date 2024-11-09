@@ -7,5 +7,6 @@ const FavoriteItem = sequelize.define('FavoriteItem', {
 }, {
     timestamps: true
 });
+
 module.exports = FavoriteItem;
 

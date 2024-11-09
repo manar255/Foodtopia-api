@@ -27,16 +27,12 @@ database:-
     - order
 =========================
 next tasks:- 
-
-- order item in cart 
 - update order status [ cancel - recived]
-- get user all orders
-- get all orders
-
 - add payment gateway
 - data validation
 - upload files in cloud
 - deploy project 
+- add authentaction in routes
 =========================
 done :-
 = add new item 
@@ -55,6 +51,9 @@ done :-
 - remove Item from favorite list
 - get all in favorite list
 - get all item in cart
+- order items in cart 
+- get user all orders
+- get all orders
 =========================
 - ضبط الداتا الى راجعه ف الريسبونس
 - data validation اعمل 

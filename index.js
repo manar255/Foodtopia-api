@@ -43,6 +43,7 @@ app.use('/item',require('./routes/itemRouter.js'))
 app.use('/offer',require('./routes/offerRouter.js'))
 app.use('/cart',require('./routes/cartRouter.js'))
 app.use('/favorite',require('./routes/favoriteRouter.js'))
+app.use('/order',require('./routes/orderRouter.js'))
 
 // app.use('/order',require('./routes/orderRouter.js'))
 
